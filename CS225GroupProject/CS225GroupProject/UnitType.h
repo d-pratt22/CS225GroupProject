@@ -12,9 +12,9 @@ struct UnitType {
 	int maxHealth;
 	int damage;
 	string damageType;
-	int armorAmount;
-	int armorPiercingAmount;
-	float speed;
+	int armorAmount; //out of 100, chance to reflect damage
+	int armorPiercingAmount; //out of 100, amount of armor to ignore
+	int speed;
 };
 
 #endif
