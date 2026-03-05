@@ -7,6 +7,7 @@ using namespace std;
 
 struct UnitType {
 	string name;
+	int cost;
 	int range;
 	int maxHealth;
 	int damage;
