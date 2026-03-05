@@ -127,7 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="IncludeStatements.h" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="StartGame.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="StartGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
