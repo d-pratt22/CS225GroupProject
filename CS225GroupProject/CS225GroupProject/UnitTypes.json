@@ -16,3 +16,16 @@
 		}
 
 	]}
+/*
+Base for Type object
+
+			name: 
+			cost: 
+			range: 
+			maxHealth: 
+			damage: 
+			damageType: 
+			armorAmount: 
+			armorPiercingAmount: 
+			speed: 
+*/

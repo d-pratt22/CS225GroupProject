@@ -8,7 +8,11 @@ int main() {
 	StartGame();
 
 	while (winner == false) {
-		//add game here
+		/*
+			-Movement
+			-Battle
+			-Build
+		*/
 	}
 
 	return 0;
