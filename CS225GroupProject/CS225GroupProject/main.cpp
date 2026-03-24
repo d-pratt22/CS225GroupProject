@@ -1,5 +1,6 @@
 #include <iostream>
 #include "StartGame.h"
+#include "Movement.h"
 
 using namespace std;
 
@@ -8,9 +9,11 @@ int main() {
 	StartGame();
 
 	while (winner == false) {
+		Move();
 		/*
 			-Movement
 			-Battle
+			-Check for Winner
 			-Build
 		*/
 	}

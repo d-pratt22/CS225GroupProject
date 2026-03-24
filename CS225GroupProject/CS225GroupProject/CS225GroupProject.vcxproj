@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\danie\Documents\GitHub\CS225GroupProject\CS225GroupProject\CS225GroupProject\external\json</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,12 +130,16 @@
   <ItemGroup>
     <ClCompile Include="ArmyBuilder.cpp" />
     <ClCompile Include="ErrorHandling.cpp" />
+    <ClCompile Include="JsonHandler.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Movement.cpp" />
     <ClCompile Include="StartGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArmyBuilder.h" />
     <ClInclude Include="ErrorHandling.h" />
+    <ClInclude Include="JsonHandler.h" />
+    <ClInclude Include="Movement.h" />
     <ClInclude Include="StartGame.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitType.h" />
