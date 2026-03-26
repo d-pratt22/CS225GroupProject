@@ -1,24 +1,28 @@
 {
-	"Basic Starship":{
-			"cost": 100,
-			"range": 150,
-			"maxHealth": 100,
-			"damage": 25,
-			"armorAmount": 25,
-			"armorPiercingAmount": 5,
-			"speed": 40
-		},
+	"objects":[
+	{
+		"name": "Basic Starship",
+		"cost": 100,
+		"range": 150,
+		"maxHealth": 100,
+		"damage": 25,
+		"armorAmount": 25,
+		"armorPiercingAmount": 5,
+		"speed": 40
+	},
+	]
 }
 /*
 Base for Type object
 
-	name:{ 
-			"cost": 
-			"range": 
-			"maxHealth": 
-			"damage": 
-			"armorAmount": 
-			"armorPiercingAmount": 
-			"speed": 
-		},
+	{ 
+		"name":
+		"cost": 
+		"range": 
+		"maxHealth": 
+		"damage": 
+		"armorAmount": 
+		"armorPiercingAmount": 
+		"speed": 
+	},
 */

@@ -1,6 +1,8 @@
 #ifndef JSONHANDLER_H
 #define JSONHANDLER_H
 
-void GetList();
+void CreateList();
+
+void AccessList();
 
 #endif
