@@ -1,8 +1,10 @@
 #ifndef JSONHANDLER_H
 #define JSONHANDLER_H
 
-void CreateList();
+#include <vector>
+#include "UnitType.h"
 
-void AccessList();
+std::vector<UnitType> CreateList();
+
 
 #endif

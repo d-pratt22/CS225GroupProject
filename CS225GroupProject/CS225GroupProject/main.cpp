@@ -1,15 +1,13 @@
 #include <iostream>
 #include "StartGame.h"
 #include "Movement.h"
-#include "JsonHandler.h"
-
-using namespace std;
+#include "ArmyBuilder.h"
 
 int main() {
 	bool winner = false;
 	StartGame();
 
-	CreateList();
+	ShowList();
 
 	while (winner == false) {
 		Move();

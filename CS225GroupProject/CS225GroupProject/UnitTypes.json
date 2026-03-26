@@ -10,6 +10,16 @@
 		"armorPiercingAmount": 5,
 		"speed": 40
 	},
+	{ 
+		"name": "Heavy Starship",
+		"cost": 300,
+		"range": 200,
+		"maxHealth": 200,
+		"damage": 50,
+		"armorAmount": 60,  
+		"armorPiercingAmount": 20, 
+		"speed": 10
+	}
 	]
 }
 /*
