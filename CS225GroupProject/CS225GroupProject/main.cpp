@@ -9,21 +9,27 @@ int main() {
 	std::vector<UnitType> army;
 	bool winner = false;
 	int turnNumber = 0;
+	int resources;
 
 	StartGame();
-	MakeDefaultArmy(army);
+	resources = MakeDefaultArmy(army);
 	
 	while (winner == false) {
 		turnNumber++;
 		std::cout << "********  Turn " << turnNumber << "  ********" << std::endl;
 
+		//Movement
 		Move();
-		/*
-			-Movement
-			-Battle
-			-Check for Winner
-			-Build
-		*/
+
+		//Battle
+
+
+		//Check For Winner
+
+
+		//Build New Ships
+		PurchaseList(resources, army);
+
 		winner = true;
 	}
 

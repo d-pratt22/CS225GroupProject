@@ -2,8 +2,6 @@
 #include "JsonHandler.h"
 #include "ArmyBuilder.h"
 
-
-
 void ShowList(){
 	std::vector<UnitType> units = CreateList();
 	bool exit = false;
@@ -71,7 +69,7 @@ void PurchaseList(int& resource, std::vector<UnitType>& army) {
 	}
 }
 
-void MakeDefaultArmy(std::vector<UnitType>& army) {
+int MakeDefaultArmy(std::vector<UnitType>& army) {
 	bool exit = false;
 	int resource = 1000;
 	std::cout << "General, you currently have 1000 resources at your disposal" << std::endl;
@@ -93,11 +91,8 @@ void MakeDefaultArmy(std::vector<UnitType>& army) {
 		else {
 			exit = true;
 		}
-			/*
-			show menu of ships and their costs
-			go to purchase menu to buy ships (which ones and quantity)
-			exit and return a list of Units
-			*/
+
 	}
+	return resource;
 	
 }

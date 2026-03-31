@@ -8,6 +8,6 @@ void ShowList();
 
 void PurchaseList(int& resource, std::vector<UnitType>& army);
 
-void MakeDefaultArmy(std::vector<UnitType>& army);
+int MakeDefaultArmy(std::vector<UnitType>& army);
 
 #endif
