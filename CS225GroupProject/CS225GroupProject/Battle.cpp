@@ -1,10 +1,28 @@
 #include "Battle.h"
 
+#include <vector>
+#include "Unit.h"
+#include "UnitType.h"
+
+void SetupBattlefield() {
+	std::vector<Unit> units;
+
+
+}
 /*
 -Grab list of armies
 -One by one ask player/ai to enter in/wasd their ships in a deployment zone warhammer style
 -After that is all done, save the x and y and send out that
 --Use the Unit.h to create a bunch of references to the objects and then use those in the actual battle
+
+for (int i = 0; i < chosenIndexes.size(); ++i) {
+    const UnitType& type = unitTypes[chosenIndexes[i]];
+
+    int x = deployment logic ;
+    int y =  deployment logic ;
+
+    units.emplace_back(type, x, y);
+}
 */
 
 /*

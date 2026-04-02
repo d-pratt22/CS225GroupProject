@@ -3,4 +3,6 @@
 
 
 
+void SetupBattlefield();
+
 #endif
