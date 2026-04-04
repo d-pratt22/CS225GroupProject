@@ -4,7 +4,7 @@
 #include "Unit.h"
 #include "UnitType.h"
 
-void SetupBattlefield() {
+void SetupBattlefield(std::vector<UnitType>& army) {
 	std::vector<Unit> units;
 
 
@@ -23,6 +23,8 @@ for (int i = 0; i < chosenIndexes.size(); ++i) {
 
     units.emplace_back(type, x, y);
 }
+
+return units**
 */
 
 /*

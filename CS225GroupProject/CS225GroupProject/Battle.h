@@ -3,6 +3,6 @@
 
 
 
-void SetupBattlefield();
+void SetupBattlefield(std::vector<UnitType>& army);
 
 #endif
