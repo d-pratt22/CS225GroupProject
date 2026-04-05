@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClCompile Include="ArmyBuilder.cpp" />
     <ClCompile Include="Battle.cpp" />
+    <ClCompile Include="Display.cpp" />
     <ClCompile Include="ErrorHandling.cpp" />
     <ClCompile Include="JsonHandler.cpp" />
     <ClCompile Include="main.cpp" />
@@ -139,9 +140,12 @@
   <ItemGroup>
     <ClInclude Include="ArmyBuilder.h" />
     <ClInclude Include="Battle.h" />
+    <ClInclude Include="Display.h" />
     <ClInclude Include="ErrorHandling.h" />
     <ClInclude Include="JsonHandler.h" />
     <ClInclude Include="Movement.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Ship.h" />
     <ClInclude Include="StartGame.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitType.h" />

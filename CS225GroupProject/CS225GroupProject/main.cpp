@@ -12,7 +12,7 @@ int main() {
 	int resources;
 
 	StartGame();
-	resources = MakeDefaultArmy(army);
+	//resources = MakeDefaultArmy(army);
 	
 	while (winner == false) {
 		turnNumber++;

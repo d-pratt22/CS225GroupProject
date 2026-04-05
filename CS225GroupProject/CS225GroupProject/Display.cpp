@@ -10,34 +10,10 @@ https://stackoverflow.com/questions/26438222/print-a-filled-square-in-console
 #include <thread>
 #include <chrono>
 #include <conio.h>
-using namespace std;
+#include "Display.h"
 using namespace std::chrono_literals;
 
 #define MapSize 40
-
-class Player {
-public:
-	int x;
-	int y;
-	int range;
-
-	Player() {
-		x = 0;
-		y = 0;
-		range = 3;
-	}
-};
-
-class Ship {
-public:
-	int x;
-	int y;
-
-	Ship() {
-		x = 10;
-		y = 6;
-	}
-};
 
 void SetConsoleColor(int textColor, int bgColor)
 {
@@ -47,11 +23,11 @@ void SetConsoleColor(int textColor, int bgColor)
 
 void MakePixel(int color) {
 	SetConsoleColor(4, color);
-	cout << "  ";
+	std::cout << "  ";
 	SetConsoleColor(0, 0);
 }
 
-void Display(Player& player, Ship& ship) {
+void SetDisplay(Player& player, Ship& ship) {
 	system("cls");
 	int pixelCount = 0;
 	int color;
@@ -68,52 +44,59 @@ void Display(Player& player, Ship& ship) {
 		}
 		//this_thread::sleep_for(chrono::nanoseconds(400));
 		if (i % MapSize == 0) {
-			cout << endl;
+			std::cout << std::endl;
 		}
 	}
 	SetConsoleColor(3, 0);
-	cout << pixelCount << endl;
-	cout << "X:" << player.x << " " << "Y:" << player.y / MapSize << endl;
-	SetConsoleColor(0, 0);
+	std::cout << pixelCount << std::endl;
+	std::cout << "X:" << player.x << " " << "Y:" << player.y / MapSize << std::endl;
+	SetConsoleColor(7, 0);
 	pixelCount = 0;
 }
 
-srand(time(NULL));
-bool looping = true;
-Player player;
-Ship ship;
-Display(player, ship);
+void Display() {
+	srand(time(NULL));
+	bool looping = true;
+	Player player;
+	Ship ship;
 
-while (looping) {
-	if (_kbhit()) {
-		char key = _getch();
+	std::cout << "Press WASD to move (any other key to exit)" << std::endl;
+	std::this_thread::sleep_for(3000ms);
+
+	SetDisplay(player, ship);
+
+	while (looping) {
+		if (_kbhit()) {
+			char key = _getch();
 
 
-		switch (key) {
-		case 'w':
-			cout << "Move forward." << endl;
-			player.y += MapSize;
-			Display(player, ship);
-			break;
-		case 'a':
-			cout << "Move left." << endl;
-			player.x++;
-			Display(player, ship);
-			break;
-		case 's':
-			cout << "Move back." << endl;
-			player.y -= MapSize;
-			Display(player, ship);
-			break;
-		case 'd':
-			cout << "Move right." << endl;
-			player.x--;
-			Display(player, ship);
-			break;
-		default:
-			cout << "Exited." << endl;
-			looping = false;
-			break;
+			switch (key) {
+			case 'w':
+				std::cout << "Move forward." << std::endl;
+				player.y += MapSize;
+				SetDisplay(player, ship);
+				break;
+			case 'a':
+				std::cout << "Move left." << std::endl;
+				player.x++;
+				SetDisplay(player, ship);
+				break;
+			case 's':
+				std::cout << "Move back." << std::endl;
+				player.y -= MapSize;
+				SetDisplay(player, ship);
+				break;
+			case 'd':
+				std::cout << "Move right." << std::endl;
+				player.x--;
+				SetDisplay(player, ship);
+				break;
+			default:
+				std::cout << "Exited." << std::endl;
+				looping = false;
+				break;
+			}
 		}
 	}
+	//SetConsoleColor(7, 0);
 }

@@ -1,9 +1,5 @@
 #include "Battle.h"
 
-#include <vector>
-#include "Unit.h"
-#include "UnitType.h"
-
 void SetupBattlefield(std::vector<UnitType>& army) {
 	std::vector<Unit> units;
 
