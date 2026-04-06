@@ -5,6 +5,8 @@
 #include "Unit.h"
 #include "UnitType.h"
 
-void SetupBattlefield(std::vector<UnitType>& army);
+std::vector<Unit> SetupBattlefield(std::vector<UnitType>& army);
+
+bool Battle(std::vector<Unit>& units);
 
 #endif

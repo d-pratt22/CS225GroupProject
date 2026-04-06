@@ -1,35 +1,37 @@
+#include <iostream>
 #include "Battle.h"
 
-void SetupBattlefield(std::vector<UnitType>& army) {
+std::vector<Unit> SetupBattlefield(std::vector<UnitType>& army) {
 	std::vector<Unit> units;
 
     for (int i = 0; i < army.size(); i++) {
         const UnitType& type = army[i];
 
-        int x = 1; //Add in stuff in the Display scripts or elsewhere
-        int y = 1;
+        int x = 0;
+        int y = 0;
+
+        std::cout << "Enter x coordinate of ship #" << i + 1 << " the " << type.name << " (0-39): ";
+        std::cin >> x;
+        std::cout << "Enter y coordinate (0-15): ";
+        std::cin >> y;
 
         units.emplace_back(type, x, y);
     }
-}
-/*
--Grab list of armies
--One by one ask player/ai to enter in/wasd their ships in a deployment zone warhammer style
--After that is all done, save the x and y and send out that
---Use the Unit.h to create a bunch of references to the objects and then use those in the actual battle
-
-for (int i = 0; i < chosenIndexes.size(); ++i) {
-    const UnitType& type = unitTypes[chosenIndexes[i]];
-
-    int x = deployment logic ;
-    int y =  deployment logic ;
-
-    units.emplace_back(type, x, y);
+    return units;
 }
 
-return units**
-*/
-
+bool Battle(std::vector<Unit>& units) {
+    for (const auto& unit : units) {
+        /*
+        if (in range) {
+        shoot at target
+        }
+        else{
+        move up
+        }
+        */
+    }
+}
 /*
 -Grab list of armies
 -Set up loop to go through each ship one by one
@@ -38,4 +40,6 @@ return units**
 -If in range then attack the other ships and take into account how armor and all that
 
 -Basically each ship needs to run through a loop to either move or shoot, then play a numbers game
+
+-Create a vector (or something) of enemy x and y then see which one is closest by numbers then either move to it or shoot it
 */

@@ -3,6 +3,7 @@
 #include "StartGame.h"
 #include "ArmyBuilder.h"
 #include "UnitType.h"
+#include "Unit.h"
 #include "Planets.h"
 #include "GeneratePlanets.h"
 #include "Display.h"
@@ -17,6 +18,7 @@ int main() {
 	Planet p;
 	std::vector<UnitType> army;
 	std::vector<Planet> planets;
+	std::vector<Unit> units;
 	srand(time(NULL));
 	bool winner = false;
 	bool isOnPlanet;
@@ -44,7 +46,10 @@ int main() {
 		}
 
 		//Battle
-		SetupBattlefield(army);
+		if (isOnPlanet && p.claimed != 1) {
+			units = SetupBattlefield(army);
+			playerWon = Battle(units);
+		}
 
 		if (playerWon && isOnPlanet) {
 			ClaimPlanet(p);
