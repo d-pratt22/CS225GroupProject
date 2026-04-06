@@ -132,9 +132,10 @@
     <ClCompile Include="Battle.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="ErrorHandling.cpp" />
+    <ClCompile Include="GeneratePlanets.cpp" />
     <ClCompile Include="JsonHandler.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Movement.cpp" />
+    <ClCompile Include="PlanetClaim.cpp" />
     <ClCompile Include="StartGame.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -142,10 +143,11 @@
     <ClInclude Include="Battle.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="ErrorHandling.h" />
+    <ClInclude Include="GeneratePlanets.h" />
     <ClInclude Include="JsonHandler.h" />
-    <ClInclude Include="Movement.h" />
+    <ClInclude Include="PlanetClaim.h" />
+    <ClInclude Include="Planets.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Ship.h" />
     <ClInclude Include="StartGame.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitType.h" />

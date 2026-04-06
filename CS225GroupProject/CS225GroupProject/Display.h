@@ -1,15 +1,16 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
+#include <vector>
 #include "Player.h"
-#include "Ship.h"
+#include "Planets.h"
 
 void SetConsoleColor(int textColor, int bgColor);
 
 void MakePixel(int color);
 
-void SetDisplay(Player& player, Ship& ship);
+void SetDisplay(Player& player, std::vector<Planet> planets);
 
-void Display();
+void Display(Player& player, std::vector<Planet> planets);
 
 #endif
