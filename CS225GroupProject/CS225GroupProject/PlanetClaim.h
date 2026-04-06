@@ -7,4 +7,8 @@
 
 bool OnPlanet(Player player, std::vector<Planet> planets);
 
+Planet GetPlanet(Player player, std::vector<Planet> planets);
+
+void ClaimPlanet(Planet& planet);
+
 #endif

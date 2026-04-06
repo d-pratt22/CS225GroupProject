@@ -3,6 +3,6 @@
 
 #include "Planets.h"
 
-void GeneratePlanets(std::vector<Planet>& planets);
+int GeneratePlanets(std::vector<Planet>& planets);
 
 #endif

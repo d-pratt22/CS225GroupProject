@@ -3,7 +3,14 @@
 void SetupBattlefield(std::vector<UnitType>& army) {
 	std::vector<Unit> units;
 
+    for (int i = 0; i < army.size(); i++) {
+        const UnitType& type = army[i];
 
+        int x = 1; //Add in stuff in the Display scripts or elsewhere
+        int y = 1;
+
+        units.emplace_back(type, x, y);
+    }
 }
 /*
 -Grab list of armies

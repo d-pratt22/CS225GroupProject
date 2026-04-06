@@ -29,40 +29,59 @@ void MakePixel(int color) {
 
 void SetDisplay(Player& player, std::vector<Planet> planets) {
 	system("cls");
-	int pixelCount = 0;
-	int color;
-	for (int i = 1; i < MapSize * MapSize + 1; ++i) { // loops through and prints each pixel 
-		pixelCount++;
-		if (pixelCount == (MapSize * MapSize - player.x - player.y)) {
-			MakePixel(5);
-		}
-		else {
+
+	for (int row = MapSize - 1; row >= 0; --row) {
+		for (int col = 0; col < MapSize; ++col) {
+			if (player.x == col && player.y == row) {
+				MakePixel(5);
+				continue;
+			}
+			
 			bool isPlanet = false;
+			bool playerClaimed = false;
+			bool enemyClaimed = false;
 
 			for (const auto& planet : planets) {
-				if (pixelCount == (MapSize * MapSize - planet.x - planet.y * MapSize)) {
+				if (planet.x == col && planet.y == row) {
 					isPlanet = true;
+					if (planet.claimed == 1) {
+						playerClaimed = true;
+					}
+					else if (planet.claimed == 0) {
+						playerClaimed = false;
+						enemyClaimed = false;
+					}
+					else {
+						enemyClaimed = true;
+					}
 					break;
 				}
 			}
 
 			if (isPlanet) {
-				MakePixel(2);
+				if (playerClaimed) {
+					MakePixel(4);
+				}
+				else if (enemyClaimed) {
+					MakePixel(3);
+				}
+				else {
+					MakePixel(2);
+				}
 			}
 			else {
 				MakePixel(7);
 			}
+			
 		}
 		//this_thread::sleep_for(chrono::nanoseconds(400));
-		if (i % MapSize == 0) {
-			std::cout << std::endl;
-		}
+
+		std::cout << std::endl;
+
 	}
 	SetConsoleColor(3, 0);
-	std::cout << pixelCount << std::endl;
-	std::cout << "X:" << player.x << " " << "Y:" << player.y / MapSize << std::endl;
+	std::cout << "X:" << player.x << " " << "Y:" << player.y << std::endl;
 	SetConsoleColor(7, 0);
-	pixelCount = 0;
 }
 
 void Display(Player& player, std::vector<Planet> planets) {
@@ -83,22 +102,22 @@ void Display(Player& player, std::vector<Planet> planets) {
 			switch (key) {
 			case 'w':
 				std::cout << "Move forward." << std::endl;
-				player.y += MapSize;
+				player.y++;
 				SetDisplay(player, planets);
 				break;
 			case 'a':
 				std::cout << "Move left." << std::endl;
-				player.x++;
+				player.x--;
 				SetDisplay(player, planets);
 				break;
 			case 's':
 				std::cout << "Move back." << std::endl;
-				player.y -= MapSize;
+				player.y--;
 				SetDisplay(player, planets);
 				break;
 			case 'd':
 				std::cout << "Move right." << std::endl;
-				player.x--;
+				player.x++;
 				SetDisplay(player, planets);
 				break;
 			default:

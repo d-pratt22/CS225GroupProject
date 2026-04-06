@@ -1,6 +1,6 @@
 #ifndef STARTGAME_H
 #define STARTGAME_H
 
-void StartGame();
+void StartGame(int winAmount);
 
 #endif

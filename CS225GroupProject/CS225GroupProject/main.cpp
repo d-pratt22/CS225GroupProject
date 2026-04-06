@@ -9,20 +9,28 @@
 #include "Battle.h"
 #include "Player.h"
 #include "PlanetClaim.h"
+#include "Resources.h"
+#include "CheckWinner.h"
 
 int main() {
 	Player player;
+	Planet p;
 	std::vector<UnitType> army;
 	std::vector<Planet> planets;
 	srand(time(NULL));
 	bool winner = false;
 	bool isOnPlanet;
+	bool playerWon = false;
 	int turnNumber = 0;
 	int resources;
+	int planetAmount;
 
-	StartGame();
+	planetAmount = GeneratePlanets(planets);
+
+	int winAmount = planetAmount - 5;
+
+	StartGame(winAmount);
 	resources = MakeDefaultArmy(army);
-	GeneratePlanets(planets);
 	
 	while (winner == false) {
 		turnNumber++;
@@ -31,17 +39,23 @@ int main() {
 		//Movement
 		Display(player, planets);
 		isOnPlanet = OnPlanet(player, planets);
+		if (isOnPlanet) {
+			p = GetPlanet(player, planets);
+		}
 
 		//Battle
 		SetupBattlefield(army);
 
-		//Check For Winner
+		if (playerWon && isOnPlanet) {
+			ClaimPlanet(p);
+		}
 
+		//Check For Winner
+		CheckWinner(planets, winAmount);
 
 		//Build New Ships
+		GetPlanetResources(resources, planets);
 		PurchaseList(resources, army);
-
-		winner = true;
 	}
 
 	return 0;
