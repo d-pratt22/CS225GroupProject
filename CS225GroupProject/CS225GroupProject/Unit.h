@@ -6,9 +6,7 @@
 class Unit {
 public:
 	Unit(const UnitType& Type, int x, int y) : Type{ Type }, xPos{ x }, yPos{ y }, currentHealth{ Type.maxHealth } {}
-	~Unit() {
-		std::cout << "Ship exited battle!";
-	};
+	~Unit() {};
 
 	const UnitType& Type;
 

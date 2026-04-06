@@ -26,7 +26,7 @@ int main() {
 	bool isOnPlanet;
 	bool playerWon = false;
 	int turnNumber = 0;
-	int resources;
+	int resources = 0;
 	int planetAmount;
 
 	planetAmount = GeneratePlanets(planets);
@@ -35,35 +35,31 @@ int main() {
 
 	StartGame(winAmount);
 	resources = MakeDefaultArmy(army);
-	MakeSimpleEnemyArmy(eArmy);
 	
 	while (winner == false) {
 		turnNumber++;
 		std::cout << "********  Turn " << turnNumber << "  ********" << std::endl;
 
-		//Movement
 		Display(player, planets);
 		isOnPlanet = OnPlanet(player, planets);
 		if (isOnPlanet) {
 			p = GetPlanet(player, planets);
 		}
 
-		//Battle
 		if (isOnPlanet && p.claimed != 1) {
 			units = SetupBattlefield(army);
+			MakeSimpleEnemyArmy(eArmy); 
 			eUnits = SetupEnemyBattlefield(eArmy);
-			playerWon = Battle(units, eUnits);
+			playerWon = Battle(units, eUnits, resources);
 		}
 
 		if (playerWon && isOnPlanet) {
 			ClaimPlanet(p);
 		}
 
-		//Build New Ships
 		GetPlanetResources(resources, planets);
 		PurchaseList(resources, army);
 
-		//Check For Winner
 		winner = CheckWinner(planets, winAmount);
 	}
 

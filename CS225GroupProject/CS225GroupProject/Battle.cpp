@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Battle.h"
+#include "Display.h"
 
 std::vector<Unit> SetupBattlefield(std::vector<UnitType>& army) {
 	std::vector<Unit> units;
@@ -34,7 +35,7 @@ std::vector<Unit> SetupEnemyBattlefield(std::vector<UnitType>& eArmy) {
     return eUnits;
 }
 
-bool Battle(std::vector<Unit>& units, std::vector<Unit>& eUnits) {
+bool Battle(std::vector<Unit>& units, std::vector<Unit>& eUnits, int& resources) {
     int rangeVal = 999;
     int armorTotal = 0;
     int destroyedCount = 0;
@@ -65,6 +66,7 @@ bool Battle(std::vector<Unit>& units, std::vector<Unit>& eUnits) {
         if (!fired) {
             unit.yPos = unit.yPos + (unit.Type.speed / 2);
         }
+        DisplayBattle(units, eUnits);
     }
 
     for (const auto& eUnit : eUnits) {
@@ -72,9 +74,13 @@ bool Battle(std::vector<Unit>& units, std::vector<Unit>& eUnits) {
             destroyedCount++;
         }
     }
-
+    int totalCost = 0;
     if (destroyedCount >= eUnits.size())
     {
+        for (const auto& eUnit : eUnits) {
+            totalCost += eUnit.Type.cost;
+        }
+        resources += totalCost / 2;
         return true;
     }
 
@@ -104,6 +110,7 @@ bool Battle(std::vector<Unit>& units, std::vector<Unit>& eUnits) {
         if (!fired) {
             eUnit.yPos = eUnit.yPos - (eUnit.Type.speed / 2);
         }
+        DisplayBattle(units, eUnits);
     }
 
     for (const auto& unit : units) {

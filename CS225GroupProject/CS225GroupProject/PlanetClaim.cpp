@@ -30,5 +30,5 @@ Planet GetPlanet(Player player, std::vector<Planet> planets) {
 
 void ClaimPlanet(Planet& planet) {
 	planet.claimed = 1;
-	std::cout << "Planet claimed! You will now receive " << planet.resourceAmount << " per turn!\n";
+	std::cout << "Planet claimed! You will now receive " << planet.resourceAmount << " resources per turn!\n";
 }

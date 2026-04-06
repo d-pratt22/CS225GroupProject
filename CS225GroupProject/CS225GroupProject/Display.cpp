@@ -74,7 +74,6 @@ void SetDisplay(Player& player, std::vector<Planet> planets) {
 			}
 			
 		}
-		//this_thread::sleep_for(chrono::nanoseconds(400));
 
 		std::cout << std::endl;
 
@@ -129,4 +128,41 @@ void Display(Player& player, std::vector<Planet> planets) {
 			std::cout << "You have done " << moveCount << " moves\n";
 		}
 	}
+}
+
+void DisplayBattle(std::vector<Unit> units, std::vector<Unit> eUnits) {
+	system("cls");
+
+	for (int row = MapSize - 1; row >= 0; --row) {
+		for (int col = 0; col < MapSize; ++col) {
+
+			bool drawn = false;
+
+			for (const auto& unit : units) {
+
+				if (unit.xPos == col && unit.yPos == row) {
+					MakePixel(5);
+					drawn = true;
+					break;
+				}
+			}
+
+			for (const auto& eUnit : eUnits) {
+				if (eUnit.xPos == col && eUnit.yPos == row) {
+					MakePixel(3);
+					drawn = true;
+					break;
+				}
+			}	
+			if (!drawn) {
+				MakePixel(7);
+			}
+		}
+
+		std::this_thread::sleep_for(10ms);
+
+		std::cout << std::endl;
+
+	}
+	SetConsoleColor(7, 0);
 }
