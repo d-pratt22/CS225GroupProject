@@ -10,4 +10,6 @@ void PurchaseList(int& resource, std::vector<UnitType>& army);
 
 int MakeDefaultArmy(std::vector<UnitType>& army);
 
+void MakeSimpleEnemyArmy(std::vector<UnitType>& eArmy);
+
 #endif

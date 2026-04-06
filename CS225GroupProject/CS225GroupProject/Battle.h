@@ -7,6 +7,8 @@
 
 std::vector<Unit> SetupBattlefield(std::vector<UnitType>& army);
 
-bool Battle(std::vector<Unit>& units);
+std::vector<Unit> SetupEnemyBattlefield(std::vector<UnitType>& eArmy);
+
+bool Battle(std::vector<Unit>& units, std::vector<Unit>& eUnits);
 
 #endif

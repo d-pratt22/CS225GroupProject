@@ -129,5 +129,4 @@ void Display(Player& player, std::vector<Planet> planets) {
 			std::cout << "You have done " << moveCount << " moves\n";
 		}
 	}
-	//SetConsoleColor(7, 0);
 }

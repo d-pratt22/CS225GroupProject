@@ -17,8 +17,10 @@ int main() {
 	Player player;
 	Planet p;
 	std::vector<UnitType> army;
+	std::vector<UnitType> eArmy;
 	std::vector<Planet> planets;
 	std::vector<Unit> units;
+	std::vector<Unit> eUnits;
 	srand(time(NULL));
 	bool winner = false;
 	bool isOnPlanet;
@@ -33,6 +35,7 @@ int main() {
 
 	StartGame(winAmount);
 	resources = MakeDefaultArmy(army);
+	MakeSimpleEnemyArmy(eArmy);
 	
 	while (winner == false) {
 		turnNumber++;
@@ -48,19 +51,20 @@ int main() {
 		//Battle
 		if (isOnPlanet && p.claimed != 1) {
 			units = SetupBattlefield(army);
-			playerWon = Battle(units);
+			eUnits = SetupEnemyBattlefield(eArmy);
+			playerWon = Battle(units, eUnits);
 		}
 
 		if (playerWon && isOnPlanet) {
 			ClaimPlanet(p);
 		}
 
-		//Check For Winner
-		CheckWinner(planets, winAmount);
-
 		//Build New Ships
 		GetPlanetResources(resources, planets);
 		PurchaseList(resources, army);
+
+		//Check For Winner
+		winner = CheckWinner(planets, winAmount);
 	}
 
 	return 0;

@@ -20,26 +20,100 @@ std::vector<Unit> SetupBattlefield(std::vector<UnitType>& army) {
     return units;
 }
 
-bool Battle(std::vector<Unit>& units) {
+std::vector<Unit> SetupEnemyBattlefield(std::vector<UnitType>& eArmy) {
+    std::vector<Unit> eUnits;
+
+    for (int i = 0; i < eArmy.size(); i++) {
+        const UnitType& type = eArmy[i];
+
+        int x = rand() % 40;
+        int y = rand() % 15 + 24;
+
+        eUnits.emplace_back(type, x, y);
+    }
+    return eUnits;
+}
+
+bool Battle(std::vector<Unit>& units, std::vector<Unit>& eUnits) {
+    int rangeVal = 999;
+    int armorTotal = 0;
+    int destroyedCount = 0;
+    int playerDestroyedCount = 0;
+    for (auto& unit : units) {
+        bool fired = false;
+        for (auto& eUnit : eUnits) {
+            rangeVal = abs(eUnit.xPos - unit.xPos) + abs(eUnit.yPos - unit.yPos);
+            if (rangeVal < unit.Type.range / 10) {
+                fired = true;
+                armorTotal = unit.Type.armorPiercingAmount - eUnit.Type.armorAmount;
+                if (armorTotal < 0) {
+                    armorTotal = 0;
+                }
+
+                if (rand() % 100 + 1 >= armorTotal) {
+                    eUnit.currentHealth -= unit.Type.damage;
+                    if (eUnit.currentHealth <= 0) {
+                        eUnit.destroyed = true;
+                    }
+                    break;
+                }
+                else {
+                    break;
+                }
+            }
+        }
+        if (!fired) {
+            unit.yPos = unit.yPos + (unit.Type.speed / 2);
+        }
+    }
+
+    for (const auto& eUnit : eUnits) {
+        if (eUnit.destroyed) {
+            destroyedCount++;
+        }
+    }
+
+    if (destroyedCount >= eUnits.size())
+    {
+        return true;
+    }
+
+    for (auto& eUnit : eUnits) {
+        bool fired = false;
+        for (auto& unit : units) {
+            rangeVal = abs(unit.xPos - eUnit.xPos) + abs(unit.yPos - eUnit.yPos);
+            if (rangeVal < eUnit.Type.range / 10) {
+                fired = true;
+                armorTotal = eUnit.Type.armorPiercingAmount - unit.Type.armorAmount;
+                if (armorTotal < 0) {
+                    armorTotal = 0;
+                }
+
+                if (rand() % 100 + 1 >= armorTotal) {
+                    unit.currentHealth -= eUnit.Type.damage;
+                    if (unit.currentHealth <= 0) {
+                        unit.destroyed = true;
+                    }
+                    break;
+                }
+                else {
+                    break;
+                }
+            }
+        }
+        if (!fired) {
+            eUnit.yPos = eUnit.yPos - (eUnit.Type.speed / 2);
+        }
+    }
+
     for (const auto& unit : units) {
-        /*
-        if (in range) {
-        shoot at target
+        if (unit.destroyed) {
+            playerDestroyedCount++;
         }
-        else{
-        move up
-        }
-        */
+    }
+
+    if (playerDestroyedCount >= units.size())
+    {
+        return false;
     }
 }
-/*
--Grab list of armies
--Set up loop to go through each ship one by one
---See if ship is in range of another ship
---If not then move ships based on their movement speed
--If in range then attack the other ships and take into account how armor and all that
-
--Basically each ship needs to run through a loop to either move or shoot, then play a numbers game
-
--Create a vector (or something) of enemy x and y then see which one is closest by numbers then either move to it or shoot it
-*/
