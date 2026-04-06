@@ -38,89 +38,103 @@ std::vector<Unit> SetupEnemyBattlefield(std::vector<UnitType>& eArmy) {
 bool Battle(std::vector<Unit>& units, std::vector<Unit>& eUnits, int& resources) {
     int rangeVal = 999;
     int armorTotal = 0;
-    int destroyedCount = 0;
-    int playerDestroyedCount = 0;
-    for (auto& unit : units) {
-        bool fired = false;
-        for (auto& eUnit : eUnits) {
-            rangeVal = abs(eUnit.xPos - unit.xPos) + abs(eUnit.yPos - unit.yPos);
-            if (rangeVal < unit.Type.range / 10) {
-                fired = true;
-                armorTotal = unit.Type.armorPiercingAmount - eUnit.Type.armorAmount;
-                if (armorTotal < 0) {
-                    armorTotal = 0;
-                }
+    bool looping = true;
 
-                if (rand() % 100 + 1 >= armorTotal) {
-                    eUnit.currentHealth -= unit.Type.damage;
-                    if (eUnit.currentHealth <= 0) {
-                        eUnit.destroyed = true;
-                    }
-                    break;
-                }
-                else {
-                    break;
-                }
-            }
-        }
-        if (!fired) {
-            unit.yPos = unit.yPos + (unit.Type.speed / 2);
-        }
-        DisplayBattle(units, eUnits);
-    }
-
-    for (const auto& eUnit : eUnits) {
-        if (eUnit.destroyed) {
-            destroyedCount++;
-        }
-    }
-    int totalCost = 0;
-    if (destroyedCount >= eUnits.size())
-    {
-        for (const auto& eUnit : eUnits) {
-            totalCost += eUnit.Type.cost;
-        }
-        resources += totalCost / 2;
-        return true;
-    }
-
-    for (auto& eUnit : eUnits) {
-        bool fired = false;
+    while (looping) {
+        int destroyedCount = 0;
+        int playerDestroyedCount = 0;
         for (auto& unit : units) {
-            rangeVal = abs(unit.xPos - eUnit.xPos) + abs(unit.yPos - eUnit.yPos);
-            if (rangeVal < eUnit.Type.range / 10) {
-                fired = true;
-                armorTotal = eUnit.Type.armorPiercingAmount - unit.Type.armorAmount;
-                if (armorTotal < 0) {
-                    armorTotal = 0;
-                }
-
-                if (rand() % 100 + 1 >= armorTotal) {
-                    unit.currentHealth -= eUnit.Type.damage;
-                    if (unit.currentHealth <= 0) {
-                        unit.destroyed = true;
+            if (unit.destroyed) continue;
+            bool fired = false;
+            for (auto& eUnit : eUnits) {
+                rangeVal = abs(eUnit.xPos - unit.xPos) + abs(eUnit.yPos - unit.yPos);
+                if (rangeVal < unit.Type.range / 10) {
+                    fired = true;
+                    armorTotal = unit.Type.armorPiercingAmount - eUnit.Type.armorAmount;
+                    if (armorTotal < 0) {
+                        armorTotal = 0;
                     }
-                    break;
+
+                    if (rand() % 100 + 1 >= armorTotal) {
+                        eUnit.currentHealth -= unit.Type.damage;
+                        if (eUnit.currentHealth <= 0) {
+                            eUnit.destroyed = true;
+                        }
+                        break;
+                    }
+                    else {
+                        break;
+                    }
                 }
-                else {
-                    break;
+                if (!fired) {
+                    if (unit.yPos < eUnit.yPos) unit.yPos += unit.Type.speed / 2;
+                    else unit.yPos -= unit.Type.speed / 2;
                 }
             }
+            DisplayBattle(units, eUnits);
         }
-        if (!fired) {
-            eUnit.yPos = eUnit.yPos - (eUnit.Type.speed / 2);
-        }
-        DisplayBattle(units, eUnits);
-    }
 
-    for (const auto& unit : units) {
-        if (unit.destroyed) {
-            playerDestroyedCount++;
+        for (const auto& eUnit : eUnits) {
+            if (eUnit.destroyed) {
+                destroyedCount++;
+            }
+        }
+        int totalCost = 0;
+        if (destroyedCount >= eUnits.size())
+        {
+            for (const auto& eUnit : eUnits) {
+                totalCost += eUnit.Type.cost;
+            }
+            resources += totalCost / 2;
+            return true;
+        }
+
+        for (auto& eUnit : eUnits) {
+            if (eUnit.destroyed) continue;
+            bool fired = false;
+            for (auto& unit : units) {
+                rangeVal = abs(unit.xPos - eUnit.xPos) + abs(unit.yPos - eUnit.yPos);
+                if (rangeVal < eUnit.Type.range / 10) {
+                    fired = true;
+                    armorTotal = eUnit.Type.armorPiercingAmount - unit.Type.armorAmount;
+                    if (armorTotal < 0) {
+                        armorTotal = 0;
+                    }
+
+                    if (rand() % 100 + 1 >= armorTotal) {
+                        unit.currentHealth -= eUnit.Type.damage;
+                        if (unit.currentHealth <= 0) {
+                            unit.destroyed = true;
+                        }
+                        break;
+                    }
+                    else {
+                        break;
+                    }
+                }
+                if (!fired) {
+                    if (eUnit.yPos < unit.yPos) eUnit.yPos += eUnit.Type.speed / 2;
+                    else eUnit.yPos -= eUnit.Type.speed / 2;
+                }
+            }
+/*
+            if (!fired) {
+                eUnit.yPos = eUnit.yPos - (eUnit.Type.speed / 2);
+            }
+*/
+            DisplayBattle(units, eUnits);
+        }
+
+        for (const auto& unit : units) {
+            if (unit.destroyed) {
+                playerDestroyedCount++;
+            }
+        }
+
+        if (playerDestroyedCount >= units.size())
+        {
+            return false;
         }
     }
-
-    if (playerDestroyedCount >= units.size())
-    {
-        return false;
-    }
+    
 }

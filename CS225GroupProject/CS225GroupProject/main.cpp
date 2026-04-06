@@ -43,7 +43,7 @@ int main() {
 		Display(player, planets);
 		isOnPlanet = OnPlanet(player, planets);
 		if (isOnPlanet) {
-			p = GetPlanet(player, planets);
+			Planet& p = GetPlanet(player, planets);
 		}
 
 		if (isOnPlanet && p.claimed != 1) {
@@ -54,7 +54,7 @@ int main() {
 		}
 
 		if (playerWon && isOnPlanet) {
-			ClaimPlanet(p);
+			ClaimPlanet(player, planets);
 		}
 
 		GetPlanetResources(resources, planets);

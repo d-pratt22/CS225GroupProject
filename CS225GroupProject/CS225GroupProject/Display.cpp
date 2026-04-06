@@ -141,7 +141,12 @@ void DisplayBattle(std::vector<Unit> units, std::vector<Unit> eUnits) {
 			for (const auto& unit : units) {
 
 				if (unit.xPos == col && unit.yPos == row) {
-					MakePixel(5);
+					if (unit.destroyed == true) {
+						MakePixel(7);
+					}
+					else {
+						MakePixel(5);
+					}
 					drawn = true;
 					break;
 				}
@@ -149,7 +154,12 @@ void DisplayBattle(std::vector<Unit> units, std::vector<Unit> eUnits) {
 
 			for (const auto& eUnit : eUnits) {
 				if (eUnit.xPos == col && eUnit.yPos == row) {
+				if(eUnit.destroyed == true) {
+					MakePixel(7);
+				}
+				else {
 					MakePixel(3);
+				}
 					drawn = true;
 					break;
 				}
@@ -164,5 +174,6 @@ void DisplayBattle(std::vector<Unit> units, std::vector<Unit> eUnits) {
 		std::cout << std::endl;
 
 	}
+	std::this_thread::sleep_for(200ms);
 	SetConsoleColor(7, 0);
 }

@@ -5,10 +5,10 @@
 #include "Player.h"
 #include "Planets.h"
 
-bool OnPlanet(Player player, std::vector<Planet> planets);
+bool OnPlanet(Player player, std::vector<Planet>& planets);
 
-Planet GetPlanet(Player player, std::vector<Planet> planets);
+Planet& GetPlanet(Player player, std::vector<Planet>& planets);
 
-void ClaimPlanet(Planet& planet);
+void ClaimPlanet(Player player, std::vector<Planet>& planets);
 
 #endif

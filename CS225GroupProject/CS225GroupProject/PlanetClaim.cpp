@@ -1,7 +1,7 @@
 #include <iostream>
 #include "PlanetClaim.h"
 
-bool OnPlanet(Player player, std::vector<Planet> planets) {
+bool OnPlanet(Player player, std::vector<Planet>& planets) {
 	for (const auto& planet : planets) {
 		if (planet.x == player.x && planet.y == player.y) {
 			return true;
@@ -10,8 +10,8 @@ bool OnPlanet(Player player, std::vector<Planet> planets) {
 	return false;
 }
 
-Planet GetPlanet(Player player, std::vector<Planet> planets) {
-	for (const auto& planet : planets) {
+Planet& GetPlanet(Player player, std::vector<Planet>& planets) {
+	for (auto& planet : planets) {
 		if (planet.x == player.x && planet.y == player.y) {
 			std::cout << "Planet is currently claimed by: ";
 			if (planet.claimed == 1) {
@@ -28,7 +28,11 @@ Planet GetPlanet(Player player, std::vector<Planet> planets) {
 	}
 }
 
-void ClaimPlanet(Planet& planet) {
-	planet.claimed = 1;
-	std::cout << "Planet claimed! You will now receive " << planet.resourceAmount << " resources per turn!\n";
+void ClaimPlanet(Player player, std::vector<Planet>& planets) {
+	for (auto& planet : planets) {
+		if (planet.x == player.x && planet.y == player.y) {
+			planet.claimed = 1;
+			std::cout << "Planet claimed! You will now receive an additional " << planet.resourceAmount << " resources per turn!\n";
+		}
+	}
 }

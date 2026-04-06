@@ -100,7 +100,7 @@ int MakeDefaultArmy(std::vector<UnitType>& army) {
 void MakeSimpleEnemyArmy(std::vector<UnitType>& eArmy) {
 	std::vector<UnitType> units = CreateList();
 
-	int numOfShips = rand() % 10 + 1;
+	int numOfShips = rand() % 5 + 1;
 	int typeOfShip = rand() % 2;
 
 	for (int i = 0; i < numOfShips; i++) {
