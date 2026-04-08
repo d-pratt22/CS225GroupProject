@@ -8,7 +8,7 @@
 		"damage": 25,
 		"armorAmount": 25,
 		"armorPiercingAmount": 5,
-		"speed": 40
+		"speed": 20
 	},
 	{ 
 		"name": "Heavy Starship",
@@ -19,6 +19,16 @@
 		"armorAmount": 60,  
 		"armorPiercingAmount": 20, 
 		"speed": 10
+	},
+	{ 
+		"name": "Super Mega Death Ship",
+		"cost": 100000,
+		"range": 800,
+		"maxHealth": 2000,
+		"damage": 600,
+		"armorAmount": 95,
+		"armorPiercingAmount": 85,
+		"speed": 70
 	}
 	]
 }

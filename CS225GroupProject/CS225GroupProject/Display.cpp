@@ -139,31 +139,26 @@ void DisplayBattle(std::vector<Unit> units, std::vector<Unit> eUnits) {
 			bool drawn = false;
 
 			for (const auto& unit : units) {
-
+				if (unit.destroyed) continue;
 				if (unit.xPos == col && unit.yPos == row) {
-					if (unit.destroyed == true) {
-						MakePixel(7);
-					}
-					else {
-						MakePixel(5);
-					}
+					MakePixel(5);
 					drawn = true;
 					break;
 				}
 			}
 
-			for (const auto& eUnit : eUnits) {
-				if (eUnit.xPos == col && eUnit.yPos == row) {
-				if(eUnit.destroyed == true) {
-					MakePixel(7);
+			if (!drawn) {
+				for (const auto& eUnit : eUnits) {
+					if (eUnit.destroyed) continue;
+
+					if (eUnit.xPos == col && eUnit.yPos == row) {
+						MakePixel(3);
+						drawn = true;
+						break;
+					}
 				}
-				else {
-					MakePixel(3);
-				}
-					drawn = true;
-					break;
-				}
-			}	
+			}
+
 			if (!drawn) {
 				MakePixel(7);
 			}

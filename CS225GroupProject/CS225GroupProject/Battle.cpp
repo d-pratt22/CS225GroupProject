@@ -47,6 +47,7 @@ bool Battle(std::vector<Unit>& units, std::vector<Unit>& eUnits, int& resources)
             if (unit.destroyed) continue;
             bool fired = false;
             for (auto& eUnit : eUnits) {
+                if (eUnit.destroyed) continue;
                 rangeVal = abs(eUnit.xPos - unit.xPos) + abs(eUnit.yPos - unit.yPos);
                 if (rangeVal < unit.Type.range / 10) {
                     fired = true;
@@ -66,9 +67,18 @@ bool Battle(std::vector<Unit>& units, std::vector<Unit>& eUnits, int& resources)
                         break;
                     }
                 }
-                if (!fired) {
+            }
+            if (!fired) {
+                for (auto& eUnit : eUnits) {
+                    if (eUnit.destroyed) continue;
+
+                    if (unit.xPos < eUnit.xPos) unit.xPos += unit.Type.speed / 2;
+                    else if (unit.xPos > eUnit.xPos) unit.xPos -= unit.Type.speed / 2;
+
                     if (unit.yPos < eUnit.yPos) unit.yPos += unit.Type.speed / 2;
-                    else unit.yPos -= unit.Type.speed / 2;
+                    else if (unit.yPos > eUnit.yPos) unit.yPos -= unit.Type.speed / 2;
+
+                    break;
                 }
             }
             DisplayBattle(units, eUnits);
@@ -93,6 +103,7 @@ bool Battle(std::vector<Unit>& units, std::vector<Unit>& eUnits, int& resources)
             if (eUnit.destroyed) continue;
             bool fired = false;
             for (auto& unit : units) {
+                if (unit.destroyed) continue;
                 rangeVal = abs(unit.xPos - eUnit.xPos) + abs(unit.yPos - eUnit.yPos);
                 if (rangeVal < eUnit.Type.range / 10) {
                     fired = true;
@@ -112,16 +123,20 @@ bool Battle(std::vector<Unit>& units, std::vector<Unit>& eUnits, int& resources)
                         break;
                     }
                 }
-                if (!fired) {
+            }
+            if (!fired) {
+                for (auto& unit : units) {
+                    if (unit.destroyed) continue;
+
+                    if (eUnit.xPos < unit.xPos) eUnit.xPos += eUnit.Type.speed / 2;
+                    else if (eUnit.xPos > unit.xPos) eUnit.xPos -= eUnit.Type.speed / 2;
+
                     if (eUnit.yPos < unit.yPos) eUnit.yPos += eUnit.Type.speed / 2;
-                    else eUnit.yPos -= eUnit.Type.speed / 2;
+                    else if (eUnit.yPos > unit.yPos) eUnit.yPos -= eUnit.Type.speed / 2;
+
+                    break;
                 }
             }
-/*
-            if (!fired) {
-                eUnit.yPos = eUnit.yPos - (eUnit.Type.speed / 2);
-            }
-*/
             DisplayBattle(units, eUnits);
         }
 
