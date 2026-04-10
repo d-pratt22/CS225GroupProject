@@ -1,6 +1,7 @@
 #include <iostream>
 #include "JsonHandler.h"
 #include "ArmyBuilder.h"
+#include "ErrorHandling.h"
 
 void ShowList(){
 	std::vector<UnitType> units = CreateList();
@@ -17,6 +18,7 @@ void ShowList(){
 		std::cout << "0: Exit" << std::endl << "Enter ship number to check details: ";
 
 		std::cin >> check;
+		check = BetweenTwoValues(0, x, check);
 
 		std::cout << std::endl;
 
@@ -52,6 +54,8 @@ void PurchaseList(int& resource, std::vector<UnitType>& army) {
 		}
 		std::cout << "0: Exit" << std::endl << "Enter a number to build a ship for your army: ";
 		std::cin >> check;
+		check = BetweenTwoValues(0, x, check);
+
 
 		if (check == 0) {
 			exit = true;
@@ -61,6 +65,7 @@ void PurchaseList(int& resource, std::vector<UnitType>& army) {
 			std::cout << units[check].name << " costs " << units[check].cost << " resources" << std::endl;
 			std::cout << "Enter quantity of ships to purchase(0-" << resource / units[check].cost << "): ";
 			std::cin >> quantity;
+			quantity = BetweenTwoValues(0, resource / units[check].cost, quantity);
 			for (int i = 0; i < quantity; i++) {
 				army.push_back(units[check]);
 				resource = resource - units[check].cost;
@@ -81,6 +86,7 @@ int MakeDefaultArmy(std::vector<UnitType>& army) {
 		std::cout << "2: Purchase ships\n";
 		std::cout << "0: Exit\n";
 		std::cin >> check;
+		check = BetweenTwoValues(0, 2, check);
 
 		if (check == 1) {
 			ShowList();

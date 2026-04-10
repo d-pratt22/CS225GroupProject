@@ -2,9 +2,8 @@
 #define ERRORHANDLING_H
 
 #include <string>
-using namespace std;
+#include <iostream>
 
-string stringErrorHandling(string test);
-int intErrorHandling(int test);
+int BetweenTwoValues(int min, int max, int input);
 
 #endif

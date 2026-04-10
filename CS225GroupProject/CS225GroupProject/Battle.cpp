@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Battle.h"
 #include "Display.h"
+#include "ErrorHandling.h"
 
 std::vector<Unit> SetupBattlefield(std::vector<UnitType>& army) {
 	std::vector<Unit> units;
@@ -13,8 +14,10 @@ std::vector<Unit> SetupBattlefield(std::vector<UnitType>& army) {
 
         std::cout << "Enter x coordinate of ship #" << i + 1 << " the " << type.name << " (0-39): ";
         std::cin >> x;
+        x = BetweenTwoValues(0, 39, x);
         std::cout << "Enter y coordinate (0-15): ";
         std::cin >> y;
+        y = BetweenTwoValues(0, 15, y);
 
         units.emplace_back(type, x, y);
     }
