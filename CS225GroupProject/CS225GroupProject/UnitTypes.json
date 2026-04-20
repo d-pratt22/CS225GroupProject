@@ -21,14 +21,14 @@
 		"speed": 10
 	},
 	{ 
-		"name": "Super Mega Death Ship",
-		"cost": 100000,
-		"range": 800,
-		"maxHealth": 2000,
-		"damage": 600,
-		"armorAmount": 95,
-		"armorPiercingAmount": 85,
-		"speed": 70
+		"name": "Test",
+		"cost": 200,
+		"range": 300,
+		"maxHealth": 400,
+		"damage": 60,
+		"armorAmount": 40,
+		"armorPiercingAmount": 20,
+		"speed": 30
 	}
 	]
 }

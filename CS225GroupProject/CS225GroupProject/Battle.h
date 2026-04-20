@@ -11,4 +11,6 @@ std::vector<Unit> SetupEnemyBattlefield(std::vector<UnitType>& eArmy);
 
 bool Battle(std::vector<Unit>& units, std::vector<Unit>& eUnits, int& resources);
 
+float FastBattleSim(std::vector<Unit>& units, std::vector<Unit>& eUnits);
+
 #endif

@@ -128,12 +128,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AIMovement.cpp" />
     <ClCompile Include="ArmyBuilder.cpp" />
     <ClCompile Include="Battle.cpp" />
     <ClCompile Include="CheckWinner.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="ErrorHandling.cpp" />
     <ClCompile Include="GeneratePlanets.cpp" />
+    <ClCompile Include="GeneticAlgorithm.cpp" />
     <ClCompile Include="JsonHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlanetClaim.cpp" />
@@ -141,12 +143,15 @@
     <ClCompile Include="StartGame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AI.h" />
+    <ClInclude Include="AIMovement.h" />
     <ClInclude Include="ArmyBuilder.h" />
     <ClInclude Include="Battle.h" />
     <ClInclude Include="CheckWinner.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="ErrorHandling.h" />
     <ClInclude Include="GeneratePlanets.h" />
+    <ClInclude Include="GeneticAlgorithm.h" />
     <ClInclude Include="JsonHandler.h" />
     <ClInclude Include="PlanetClaim.h" />
     <ClInclude Include="Planets.h" />

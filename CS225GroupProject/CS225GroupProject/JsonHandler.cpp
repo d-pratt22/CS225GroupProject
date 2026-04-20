@@ -21,3 +21,4 @@ std::vector<UnitType> CreateList() {
 
 	return units;
 }
+

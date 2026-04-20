@@ -156,3 +156,150 @@ bool Battle(std::vector<Unit>& units, std::vector<Unit>& eUnits, int& resources)
     }
     
 }
+
+float FastBattleSim(std::vector<Unit>& units, std::vector<Unit>& eUnits) {
+    const int maxTurns = 50;
+    int rangeVal = 999;
+
+    for (int turn = 0; turn < maxTurns; turn++) {
+        for (auto& unit : units) {
+            if (unit.destroyed) continue;
+
+            Unit* target = nullptr;
+            int bestDist = INT_MAX;
+
+            for (auto& eUnit : eUnits) {
+                if (eUnit.destroyed) continue;
+
+                int dist = abs(eUnit.xPos - unit.xPos) +
+                    abs(eUnit.yPos - unit.yPos);
+
+                if (dist < bestDist) {
+                    bestDist = dist;
+                    target = &eUnit;
+                }
+            }
+
+            if (!target) continue;
+
+            int range = unit.Type.range / 10;
+
+            if (bestDist <= range) {
+                int armor = std::max(0,
+                    target->Type.armorAmount - unit.Type.armorPiercingAmount);
+
+                float hitChance = 1.0f - (armor / 100.0f);
+                float damage = unit.Type.damage * hitChance;
+
+                target->currentHealth -= (int)damage;
+
+                if (target->currentHealth <= 0) {
+                    target->destroyed = true;
+                }
+            }
+            else {
+                if (unit.xPos < target->xPos) {
+                    unit.xPos += unit.Type.speed / 2;
+                }
+                else if (unit.xPos > target->xPos) {
+                    unit.xPos -= unit.Type.speed / 2;
+                }
+
+                if (unit.yPos < target->yPos) {
+                    unit.yPos += unit.Type.speed / 2;
+                }
+                else if (unit.yPos > target->yPos) {
+                    unit.yPos -= unit.Type.speed / 2;
+                }
+            }
+        }
+
+        for (auto& eUnit : eUnits) {
+            if (eUnit.destroyed) continue;
+
+            Unit* target = nullptr;
+            int bestDist = INT_MAX;
+
+            for (auto& unit : units) {
+                if (unit.destroyed) continue;
+
+                int dist = abs(unit.xPos - eUnit.xPos) +
+                    abs(unit.yPos - eUnit.yPos);
+
+                if (dist < bestDist) {
+                    bestDist = dist;
+                    target = &unit;
+                }
+            }
+
+            if (!target) continue;
+
+            int range = eUnit.Type.range / 10;
+
+            if (bestDist <= range) {
+                int armor = std::max(0,
+                    target->Type.armorAmount - eUnit.Type.armorPiercingAmount);
+
+                float hitChance = 1.0f - (armor / 100.0f);
+                float damage = eUnit.Type.damage * hitChance;
+
+                target->currentHealth -= (int)damage;
+
+                if (target->currentHealth <= 0) {
+                    target->destroyed = true;
+                }
+            }
+            else {
+                if (eUnit.xPos < target->xPos) {
+                    eUnit.xPos += eUnit.Type.speed / 2;
+                }
+                else if (eUnit.xPos > target->xPos) {
+                    eUnit.xPos -= eUnit.Type.speed / 2;
+                }
+
+                if (eUnit.yPos < target->yPos) {
+                    eUnit.yPos += eUnit.Type.speed / 2;
+                }
+                else if (eUnit.yPos > target->yPos) {
+                    eUnit.yPos -= eUnit.Type.speed / 2;
+                }
+            }
+        }
+    }
+    float playerDestroyedCount = 0;
+    float destroyedCount = 0;
+    float totalPHealth = 0;
+    float totalEHealth = 0;
+
+    for (auto& u : units) {
+        if (!u.destroyed) {
+            totalPHealth += u.currentHealth;
+        }
+    }
+
+    for (auto& e : eUnits) {
+        if (!e.destroyed) {
+            totalEHealth += e.currentHealth;
+        }
+    }
+
+    for (const auto& unit : units) {
+        if (unit.destroyed) {
+            playerDestroyedCount++;
+        }
+    }
+
+    for (const auto& eUnit : eUnits) {
+        if (eUnit.destroyed) {
+            destroyedCount++;
+        }
+    }
+
+    float score =
+        (totalPHealth * 1.5f)
+        - (totalEHealth * 1.2f)
+        + (destroyedCount * 100)
+        - (playerDestroyedCount * 80);
+
+    return score;
+}
